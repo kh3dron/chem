@@ -42,10 +42,14 @@ SOTA = {
 forest = {}
 print("Testing random forest model...")
 for target in y_tr.columns:
+    
+    # Only consider rows where the target is not NaN - most drugs are not tested for most assays
     rows_tr = np.isfinite(y_tr[target]).values
     rows_te = np.isfinite(y_te[target]).values
+    
     rf = RandomForestClassifier(n_estimators=10, n_jobs=4)
     rf.fit(x_tr[rows_tr], y_tr[target][rows_tr])
+    
     p_te = rf.predict_proba(x_te[rows_te])
     auc_te = roc_auc_score(y_te[target][rows_te], p_te[:, 1])
     forest[target] = auc_te

@@ -2,6 +2,10 @@
 
 1. Data representation: How to turn chemical data into something a model can operate on? 
   - Images and videos are swtraightforward to represent as tensorts of pixel values. Text requires a little more thought to put into tokens. But molecules are harder - they have a larger vocabulary of parts (number of atoms and bonds), as well as important stucture in 3d space. The representation problem is how to encode molecules so their important characteristics (whatever they are, we aren't sure!) are preserved.
+  - Approaches: 
+    - SMILES format (text)
+    - fingerprints (bag of features, sort of similar to tokenization)
+    - Graphs (complete, but large and sparse)
 
 2. Data scarcity
 - There's a huge corpus of videos, images, and text on the web to use to train models. Chemical data is a lot more scarce. This means that models need to make the most of available data and generalize rapidly - like training a useful LLM with only a single paragraph of text.
