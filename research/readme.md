@@ -9,6 +9,8 @@
 
 2. Data scarcity
 - There's a huge corpus of videos, images, and text on the web to use to train models. Chemical data is a lot more scarce. This means that models need to make the most of available data and generalize rapidly - like training a useful LLM with only a single paragraph of text.
+- Also, data can be clustered - many chemicals are close together in the state space, which leads to bad generalizations. 
+  - Something unique here: in lots of ML problems, you can shuffle your train and test data before you start. Sometimes that's deliberately not done with chem data, so you can test predictions on data in distant classes
 
 ### Papers & Notes
 [Neural Message Passing for Quantum Chemistry](https://arxiv.org/abs/1704.01212)
