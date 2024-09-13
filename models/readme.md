@@ -13,6 +13,8 @@ So, to be really clear about the shape of the data:
 - Test data: 600 rows, 12 columns. 
     - 11 columns hold NaNs, the remaining one has 0 or 1. Each input (tested) molecule is only being evaluated for a single class.
 
-`sampleCode.py`: Default random forest classifier that comes with the [Tox21 dataset](http://bioinf.jku.at/research/DeepTox/tox21.html). Added a comparison to the SOTA of the dataset, so you can see the random forest is pretty decent
+`Attempt 0`: Default random forest classifier that comes with the [Tox21 dataset](http://bioinf.jku.at/research/DeepTox/tox21.html). Added a comparison to the SOTA of the dataset, so you can see the random forest is pretty good
 
-`Attempt 1`: KNN classification
+`Attempt 1`: KNN classification, fast 
+
+`Attempt 2`: SMV classification, extremely slow (many minutes) for not much performance. 

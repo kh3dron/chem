@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from scipy import io
 from sklearn.metrics import roc_auc_score
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 
 # load data
@@ -40,22 +40,23 @@ SOTA = {
 
 # Build a random forest model for all twelve assays
 forest = {}
-print("[*] Testing KNN model...")
+print("[*] Testing SVM model...")
 for target in y_tr.columns:
-    print(f"[*]    Training on {target}")
     
+    print(f"[*]    Training on {target}")
     # Only consider rows where the target is not NaN - most drugs are not tested for most assays
     rows_tr = np.isfinite(y_tr[target]).values
     rows_te = np.isfinite(y_te[target]).values
     
-    # KNN classification
-    print(f"[*]    Fitting model with {x_tr_dense[rows_tr].shape[0]} rows")
-    knn = KNeighborsClassifier(n_neighbors=100)
-    knn.fit(x_tr_dense[rows_tr], y_tr[target][rows_tr])
-    y_te_pred = knn.predict_proba(x_te_dense[rows_te])
+    # SVM classification
+    svm = SVC(kernel='linear')
+
+    print(f"[*]    Fitting model with {x_tr[rows_tr].shape[0]} rows")
+    svm.fit(x_tr[rows_tr], y_tr[target][rows_tr])
+    y_te_pred = svm.predict(x_te[rows_te])
 
     
-    auc_te = roc_auc_score(y_te[target][rows_te], y_te_pred[:, 1])
+    auc_te = roc_auc_score(y_te[target][rows_te], y_te_pred)
     forest[target] = auc_te
     print(f"%15s: %3.5f, SOTA: %3.5f, Diff: %3.5f" % (target, auc_te, SOTA[target], auc_te - SOTA[target]))
 
